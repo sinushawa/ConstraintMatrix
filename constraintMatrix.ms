@@ -50,7 +50,6 @@ lec = when geometry selection change obj do
 				p3Line_2_Point_1 = point3 snapmode.worldHitpoint.x initialPos.y 0
 				p3Line_2_Point_2 = (p3Line_2_Point_1 + (TAxisY*10))
 				posTX = lineLineIntersect p3Line_1_Point_1 p3Line_1_Point_2 p3Line_2_Point_1 p3Line_2_Point_2
-				print posTX
 			)
 			if axisV == #Y then
 			(
@@ -58,9 +57,15 @@ lec = when geometry selection change obj do
 				p3Line_1_Point_1 = initialPos
 				p3Line_1_Point_2 = initialPos+(TAxisY*10)
 				p3Line_2_Point_1 = point3 initialPos.x snapmode.worldHitpoint.y 0
-				p3Line_2_Point_2 = (p3Line_2_Point_1 + (TAxisY*10))
+				p3Line_2_Point_2 = (p3Line_2_Point_1 + (TAxisX*10))
 				posTX = lineLineIntersect p3Line_1_Point_1 p3Line_1_Point_2 p3Line_2_Point_1 p3Line_2_Point_2
-				print posTX
+			)
+			movement = posTX - initialPos
+			if classof selection[1] == PolyMeshObject then
+			(
+				Pol = selection[1].modifiers[#Edit_Poly]
+				EditPolyMod.MoveSelection Pol movement
+				EditPolyMod.Commit Pol
 			)
 		)
 	)
